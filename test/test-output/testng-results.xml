@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-12-31T09:27:06 EET" name="Default suite" finished-at="2025-12-31T09:27:06 EET" duration-ms="261">
+    <groups>
+    </groups>
+    <test started-at="2025-12-31T09:27:06 EET" name="Default test" finished-at="2025-12-31T09:27:06 EET" duration-ms="261">
+      <class name="TPF_API.test">
+        <test-method signature="ReadPortalDB()[pri:0, instance:TPF_API.test@a1153bc]" started-at="2025-12-31T09:27:06 EET" name="ReadPortalDB" finished-at="2025-12-31T09:27:06 EET" duration-ms="155" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- ReadPortalDB -->
+      </class> <!-- TPF_API.test -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

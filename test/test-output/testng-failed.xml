@@ -3,11 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="TPF_API.test">
+      <class name="TPF_API.missmatch">
         <methods>
-          <include name="ReadPortalDB"/>
+          <include name="missmatchtest"/>
         </methods>
-      </class> <!-- TPF_API.test -->
+      </class> <!-- TPF_API.missmatch -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -8,15 +8,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import io.restassured.response.Response;
-
-
-
-
 
 public class Galileo {
 	private final String Base_URL = "https://tbf-api-prod.azurewebsites.net";
@@ -26,7 +20,7 @@ public class Galileo {
 	private final String[] White_List = {"3HB3","6TY7","6Z9H","7K1J","880J","8JY1","8QV0","D40","WV5","XI7"};		
 
 	
-public  List<String> exportGalileoDataToCsv() {
+public List<String> exportGalileoDataToCsv() {
 		List<String> galiloActivePnrStrings = new ArrayList<>();
 		Response response_Body = retrievePageNumber("1");
 		if (response_Body.statusCode() != 200) {

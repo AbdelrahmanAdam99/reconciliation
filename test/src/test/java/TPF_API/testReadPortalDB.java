@@ -1,27 +1,27 @@
 package TPF_API;
-
-import static org.testng.Assert.ARRAY_MISMATCH_TEMPLATE;
-import static org.testng.Assert.fail;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.net.spi.InetAddressResolver;
 import java.util.ArrayList;
 import java.util.List;
 
 //import org.checkerframework.dataflow.qual.TerminatesExecution;
 import org.testng.annotations.Test;
 
-public class test {
+public class testReadPortalDB {
 	@Test 
-	void  ReadPortalDB () {
+	public void  ReadPortalDB () {
 //		 Galileo ffGalileo = new Galileo();
+		Galileo ggGalileo = new Galileo();
+		 List<String> allList = new ArrayList<>();
+//		 List<String> ndc = Readcsv.ReadcsvFile("D:\\reconcilation mini\\19.12","ndc.csv" , 0,1);
+//		 List<String> wt = Readcsv.ReadcsvFile("D:\\reconcilation mini\\19.12","wt.csv" , 0,1);
+		 List<String> galileo = ggGalileo.exportGalileoDataToCsv();
+//		 allList.addAll(ndc);
+//		 allList.addAll(wt);
 		 
 		 
-		 List<String> fffStrings = Readcsv.ReadcsvFile("D:\\reconcilation mini\\19.12","ndc.csv" , 0,1);
-
-		 String[] ffStrings =  fffStrings.toArray(new String[0]);
+		 String[] ffStrings =  galileo.toArray(new String[0]);
+		 
+		 
+		 
 		 System.out.println(ffStrings.length);
 		 for(int i = 0 ; i< ffStrings.length ; i++)
 		 {

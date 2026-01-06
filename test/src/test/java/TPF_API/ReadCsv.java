@@ -31,8 +31,8 @@ public static List<Map<String,String>> ReadCsvFile(String Direction ,String csvN
 			CSVReader BufferedReader = new CSVReader(FileReader);
 			String[] HeaderLine = BufferedReader.readNext();
             Assert.assertTrue(HeaderLine.length > 1, "The file " +csvName +" is empty.");
-
 			String[] LineString;
+
 			while ((LineString = BufferedReader.readNext()) != null) {
 				HashMap<String,String> Local = new HashMap<>();
 				for(int i =0 ; i <  HeaderLine.length ;i++)
@@ -44,9 +44,10 @@ public static List<Map<String,String>> ReadCsvFile(String Direction ,String csvN
 
 			BufferedReader.close();
 		}catch (Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println(e.getMessage() + "as");
 			fail();
 		}
-		return PNRsStrings;
+
+	return PNRsStrings;
 	}
 }

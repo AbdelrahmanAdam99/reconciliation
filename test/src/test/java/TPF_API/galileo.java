@@ -15,18 +15,21 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Galileo {
-	private final String Base_URL = "https://tbf-api-prod.azurewebsites.net";
-	private final String tokenString = "7J2kV1q0b3y6R4M9s8tZ2p0qL1u3vG5hK9m4c8rF0xW2b5nC6y7s8v9t0q1w2e3r4t5y6u7i==";
-	private final String STATUS= "A";
-	private final String PAGE_Size= "100";
-	private final String[] White_List = {"3HB3","6TY7","6Z9H","7K1J","880J","8JY1","8QV0","D40","WV5","XI7"};
-	private  final String[] Header_Order = {"pnr", "createdDate", "status", "pcc", "ticketingAgentSignOn"};
-	@Test
-public void test(){
-		List<Map<String,String>> PNRsStrings = exportGalileoDataToCsv();
+public class galileo{
+	private static final String BASE_URL = "https://tbf-api-prod.azurewebsites.net";
+	private static final String API_KEY = "7J2kV1q0b3y6R4M9s8tZ2p0qL1u3vG5hK9m4c8rF0xW2b5nC6y7s8v9t0q1w2e3r4t5y6u7i==";
+	private static final String STATUS= "A";
+	private static final String PAGE_Size= "100";
+	private static final String[] CSV_HEADERS = {"pnr", "createdDate", "status", "pcc", "ticketingAgentSignOn"};
+	private static final Set<String> PCC_WHITE_LIST = Set.of("3HB3","6TY7","6Z9H","7K1J","880J","8JY1","8QV0","D40","WV5","XI7");
 
-}
+//	@Test
+//public void test(){
+//		List<Map<String,String>> PNRsStrings = exportGalileoDataToCsv();
+//		for(int i = 0; i <PNRsStrings.size() ;i++){
+//			System.out.println(PNRsStrings.get(i).get("pnr"));
+//		}
+//}
 
 public List<Map<String,String>> exportGalileoDataToCsv() {
 	List<Map<String,String>> GaliloActivePnrs = new ArrayList<>();
@@ -59,7 +62,7 @@ public List<Map<String,String>> exportGalileoDataToCsv() {
 	public List<Map<String, String>> fileWrite(CSVWriter file , int totalPage) throws Exception {
 
 		List<Map<String, String>> GaliloActivepnrs = new ArrayList<>();
-		file.writeNext(Header_Order);
+		file.writeNext(CSV_HEADERS);
 		for (int i = 1; i <= totalPage; i++) {
 			Response responseBody = RetrievePageNumber(Integer.toString(i));
 			JSONArray pageArray = new JSONArray(responseBody.getBody().asString());
@@ -67,19 +70,16 @@ public List<Map<String,String>> exportGalileoDataToCsv() {
 			for (int j = 0; j < pageArray.length(); j++) {
 				JSONObject RecordJson = pageArray.getJSONObject(j);
 				Map<String,String> RecordMap = FromJsonObjectToMap(RecordJson);
-				GaliloActivepnrs.add(RecordMap);
-				for (int n = 0; n < White_List.length; n++) {
-					if (White_List[n].equals(RecordJson.getString("pcc"))) {
+					String PCC = RecordJson.getString("pcc").trim().toUpperCase();
+					if (PCC_WHITE_LIST.contains(PCC)) {
 						List<String > WriteString = new ArrayList<>();
 						for (int s = 0 ; s< RecordMap.size()  ; s++)
 						{
-								WriteString.add(RecordMap.get(Header_Order[s]));
+								WriteString.add(RecordMap.get(CSV_HEADERS[s]));
 						}
 						file.writeNext(WriteString.toArray(new String[0]));
+						GaliloActivepnrs.add(RecordMap);
 					}
-				}
-
-
 			}
 		}
 	return GaliloActivepnrs;
@@ -88,7 +88,7 @@ public List<Map<String,String>> exportGalileoDataToCsv() {
 	
 private Map<String,String> FromJsonObjectToMap(JSONObject JsonObject){
 	Map<String,String> Local = new LinkedHashMap<>();
-    for (String s : Header_Order) {
+    for (String s : CSV_HEADERS) {
         Local.put(s, JsonObject.getString(s));
     }
 	return Local;
@@ -105,10 +105,10 @@ private Response  RetrievePageNumber(String PageNumber) {
 
 		Response response_Body = given()
 				.header("content-type", "application/json")
-				.header("x-api-key",tokenString)
+				.header("x-api-key", API_KEY)
 				.body(reqBody)
 		.when()
-				.post(Base_URL + "/api/TBFBooking/RetriveAvailableTBFBooking");
+				.post(BASE_URL + "/api/TBFBooking/RetriveAvailableTBFBooking");
 
 	return response_Body;
 	}

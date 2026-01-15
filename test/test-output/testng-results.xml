@@ -6,12 +6,12 @@
     <groups>
     </groups>
     <test started-at="2025-12-31T15:25:52 EET" name="Default test" finished-at="2025-12-31T15:25:52 EET" duration-ms="185">
-      <class name="TPF_API.missmatch">
-        <test-method signature="missmatchtest()[pri:0, instance:TPF_API.missmatch@47eaca72]" started-at="2025-12-31T15:25:52 EET" name="missmatchtest" finished-at="2025-12-31T15:25:52 EET" duration-ms="103" status="PASS">
+      <class name="tests.missmatch">
+        <test-method signature="missmatchtest()[pri:0, instance:tests.missmatch@47eaca72]" started-at="2025-12-31T15:25:52 EET" name="missmatchtest" finished-at="2025-12-31T15:25:52 EET" duration-ms="103" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- missmatchtest -->
-      </class> <!-- TPF_API.missmatch -->
+      </class> <!-- tests.missmatch -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
